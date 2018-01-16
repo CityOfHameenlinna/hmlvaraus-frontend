@@ -1,7 +1,7 @@
 ({
     baseUrl: "./app/",
     name: "App",
-    out: "../../static/js/optimized-js.js",
+    out: "../../../varaus-frontend-built/webroot/js/optimized-js.js",
     optimizeCss: "none",
     inlineText: true,
     mainConfigFile: 'app/config/config.js',
