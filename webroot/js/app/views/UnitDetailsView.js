@@ -1,17 +1,21 @@
 define( ['App',
     'backbone',
+    'backbone-radio',
     'marionette',
     'jquery',
+    'moment',
     'text!templates/unit_details_view.tmpl',
     'leaflet'
     ],
-    function(App, Backbone, Marionette, $, template, L) {
+    function(App, Backbone, Radio, Marionette, $, moment, template, L) {
         return Marionette.View.extend({
             initialize: function() {
                 this.currentUser = window.App.userCollection.currentUser;
+                this.mainRadioChannel = Radio.channel('main');
             },
             events: {
-                'click #unit-edit': 'editUnit'
+                'click #unit-edit': 'editUnit',
+                'click #to-units-boats': 'toUnitsBoats'
             },
 
             ui: {
@@ -64,6 +68,36 @@ define( ['App',
 
             editUnit: function() {
                 window.App.router.navigate('unit-edit/' + this.model.getId(), {trigger: true});
-            }
+            },
+
+            toUnitsBoats: function() {
+                if (this.currentUser) {
+                    this.showBoatResourcesTotal();
+                }
+                else {
+                    this.showBoatResourcesFree();
+                }
+                window.App.router.navigate('boat-resources', {trigger: true});
+                this.mainRadioChannel.trigger('navigated', '#nav-resources');
+            },
+
+            showBoatResourcesTotal: function(e) {
+                var filters = {
+                    show: true,
+                    unit_id: this.model.getId()
+                };
+                localStorage.setItem('boat_resource_filters', JSON.stringify(filters));
+            },
+
+            showBoatResourcesFree: function(e) {
+                var filters = {
+                    show: true,
+                    berth_begin: moment().toISOString(),
+                    berth_end: moment().toISOString(),
+                    date_filter_type: 'not_reserved',
+                    unit_id: this.model.getId()
+                };
+                localStorage.setItem('boat_resource_filters', JSON.stringify(filters));
+            },
         });
     });

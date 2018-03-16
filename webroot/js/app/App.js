@@ -133,6 +133,11 @@ define([
                     $('#nav-reservations').addClass('active');
                 });
 
+                this.mainRadioChannel.on('navigated', function(target) {
+                    $('.main-nav-item.active').removeClass('active');
+                    $(target).addClass('active');
+                });
+
                 this.userCollection.fetch({
                     url: '/api/user/current/'
                 }).done(function() {

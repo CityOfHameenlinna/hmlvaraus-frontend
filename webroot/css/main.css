@@ -332,6 +332,19 @@ nav.navbar-default {
         float: none !important;
     }
 }
+.btn-as-link {
+    background-color: transparent;
+    border: 0;
+    color: #337ab7;
+    text-decoration: none;
+    font-size: 12pt;
+    padding: 0;
+    outline: 0;
+}
+.btn-as-link:hover {
+    text-decoration: underline;
+    color: #185f9c;
+}
 
 #filter-clear {
     margin-left: 10px;
