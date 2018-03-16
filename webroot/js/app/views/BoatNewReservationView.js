@@ -241,7 +241,7 @@ define( ['App',
                     $target.prop('disabled', false);
                     return;
                 }
-
+                
                 $.ajax({
                     url: this.userCollection.currentUser ? '/api/hml_reservation/' : '/api/purchase/',
                     method: 'post',
@@ -250,8 +250,8 @@ define( ['App',
                     contentType: 'application/json'
                 })
                 .done(function(data) {
-                    if(data.redirect)
-                        window.location = data.redirect;
+                    if(data.query_string)
+                        window.open('https://payment.paytrail.com/e2/?'+data.query_string, '_self');
                     else
                         me.mainRadioChannel.trigger('reservation-changed', data.id);
                     $target.prop('disabled', false);
