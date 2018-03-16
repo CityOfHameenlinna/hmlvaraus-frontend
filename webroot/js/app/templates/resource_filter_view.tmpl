@@ -35,10 +35,12 @@
                         <option value="dock">Vain laituripaikat</option>
                     <%}%>
 
-                    <%if(filters.type == 'ground') {%>
-                        <option selected value="ground">Vain polettipaikat</option>
-                    <%}else{%>
-                        <option value="ground">Vain polettipaikat</option>
+                    <%if(currentUser && currentUser.is_staff) {%>
+                        <%if(filters.type == 'ground') {%>
+                            <option selected value="ground">Vain polettipaikat</option>
+                        <%}else{%>
+                            <option value="ground">Vain polettipaikat</option>
+                        <%}%>
                     <%}%>
 
                     <%if(filters.type == 'number') {%>

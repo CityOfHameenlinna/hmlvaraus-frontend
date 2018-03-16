@@ -85,7 +85,7 @@ define( ['App',
 
             showRequestErrors: function(errors) {
                 var userCollection = window.App.userCollection;
-                var currentUser = this.userCollection.currentUser;
+                var currentUser = userCollection.currentUser;
                 var errorArray = [];
                 for (var key in errors) {
                     if (errors.hasOwnProperty(key)) {
