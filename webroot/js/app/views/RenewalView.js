@@ -78,8 +78,8 @@ define( [
                     contentType: 'application/json'
                 })
                 .done(function(data) {
-                    if(data.redirect)
-                        window.location = data.redirect;
+                    if(data.query_string)
+                        window.open('https://payment.paytrail.com/e2/?'+data.query_string, '_self');
                     else
                         bootbox.alert('Virhe uusinnassa käsittelyssä! Ota yhteyttä asiakaspalveluun.');
                     $target.prop('disabled', false);
