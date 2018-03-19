@@ -16,13 +16,13 @@ define( [
 
             initialize: function() {
                 this.mainRadioChannel = Radio.channel('main');
-                var filterData = localStorage.getItem('boat_resource_filters');
+                var filterData = localStorage.getItem('manage_boat_resource_filters');
                 if(filterData) {
                     this.filters = JSON.parse(filterData);
                 }
 
                 this.unitCollection = this.options.unitCollection;
-                localStorage.setItem('boat_resource_filters', JSON.stringify(this.filters));
+                localStorage.setItem('manage_boat_resource_filters', JSON.stringify(this.filters));
             },
 
             regions: {
@@ -37,7 +37,7 @@ define( [
                 this.$('textarea,input,select').val('');
                 this.$('input.checkbox').prop('checked', false);
                 this.filters = {};
-                localStorage.setItem('boat_resource_filters', JSON.stringify(this.filters));
+                localStorage.setItem('manage_boat_resource_filters', JSON.stringify(this.filters));
                 this.mainRadioChannel.trigger('resource-filter-changed', this.filters);
                 $('.ordering-icon').removeClass('glyphicon-triangle-bottom glyphicon-triangle-top');
             },
@@ -58,7 +58,7 @@ define( [
                     this.filters[filterName] = value;
                 }
 
-                localStorage.setItem('boat_resource_filters', JSON.stringify(this.filters));
+                localStorage.setItem('manage_boat_resource_filters', JSON.stringify(this.filters));
 
                 this.mainRadioChannel.trigger('resource-filter-changed', this.filters);
             },
