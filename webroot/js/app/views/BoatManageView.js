@@ -29,6 +29,7 @@ define( ['App', 'backbone', 'backbone-radio', 'marionette', 'jquery', 'moment', 
                 this.cMarker = undefined;
                 this.map = undefined;
                 this.markerLayer = undefined;
+                this.childViewsInitiated = false;
             },
 
             events: {
@@ -41,7 +42,7 @@ define( ['App', 'backbone', 'backbone-radio', 'marionette', 'jquery', 'moment', 
                 var filters = {
                     show: true
                 };
-                localStorage.setItem('boat_resource_filters', JSON.stringify(filters));
+                localStorage.setItem('manage_boat_resource_filters', JSON.stringify(filters));
                 this.mainRadioChannel.trigger('show-resources');
             },
 
@@ -52,7 +53,7 @@ define( ['App', 'backbone', 'backbone-radio', 'marionette', 'jquery', 'moment', 
                     berth_end: moment().toISOString(),
                     date_filter_type: 'not_reserved'
                 };
-                localStorage.setItem('boat_resource_filters', JSON.stringify(filters));
+                localStorage.setItem('manage_boat_resource_filters', JSON.stringify(filters));
                 this.mainRadioChannel.trigger('show-resources');
             },
 
@@ -101,10 +102,14 @@ define( ['App', 'backbone', 'backbone-radio', 'marionette', 'jquery', 'moment', 
             },
 
             setupMap: function() {
-                if(!localStorage.getItem('boat_resource_filters'))
-                    localStorage.setItem('boat_resource_filters', JSON.stringify({}));
-                var unitFilter = JSON.parse(localStorage.getItem('boat_resource_filters')).unit_id;
-                this.showChildView('filterRegion', new BoatManageResourceFilterView(this.options));
+                if(!localStorage.getItem('manage_boat_resource_filters')) {
+                    localStorage.setItem('manage_boat_resource_filters', JSON.stringify({}));
+                }
+                var unitFilter = JSON.parse(localStorage.getItem('manage_boat_resource_filters')).unit_id;
+                if (!this.childViewsInitiated) {
+                    this.showChildView('filterRegion', new BoatManageResourceFilterView(this.options));
+                    this.childViewsInitiated = true;
+                }
                 var me = this;
                 this.hml = {
                     lng: 24.4590,
@@ -173,7 +178,7 @@ define( ['App', 'backbone', 'backbone-radio', 'marionette', 'jquery', 'moment', 
                             show: true,
                             unit_id: unit.getId()
                         };
-                        localStorage.setItem('boat_resource_filters', JSON.stringify(filters));
+                        localStorage.setItem('manage_boat_resource_filters', JSON.stringify(filters));
                         me.mainRadioChannel.trigger('show-resources');
                     });
                 });
