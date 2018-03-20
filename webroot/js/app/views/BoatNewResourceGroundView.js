@@ -69,6 +69,7 @@ define( ['App',
                 delete data.width_cm;
                 delete data.depth_cm;
                 delete data.price;
+                delete data.description;
 
                 data = {
                     'reservation': data,
