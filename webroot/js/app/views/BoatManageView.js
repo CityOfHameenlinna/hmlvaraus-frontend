@@ -42,7 +42,7 @@ define( ['App', 'backbone', 'backbone-radio', 'marionette', 'jquery', 'moment', 
                 var filters = {
                     show: true
                 };
-                localStorage.setItem('manage_boat_resource_filters', JSON.stringify(filters));
+                localStorage.setItem('boat_resource_filters', JSON.stringify(filters));
                 this.mainRadioChannel.trigger('show-resources');
             },
 
@@ -53,7 +53,7 @@ define( ['App', 'backbone', 'backbone-radio', 'marionette', 'jquery', 'moment', 
                     berth_end: moment().toISOString(),
                     date_filter_type: 'not_reserved'
                 };
-                localStorage.setItem('manage_boat_resource_filters', JSON.stringify(filters));
+                localStorage.setItem('boat_resource_filters', JSON.stringify(filters));
                 this.mainRadioChannel.trigger('show-resources');
             },
 
@@ -148,7 +148,7 @@ define( ['App', 'backbone', 'backbone-radio', 'marionette', 'jquery', 'moment', 
                 if (unitFilter) {
                     var units = [];
                     units.push(this.unitCollection.get(unitFilter));
-                    var unitMarkers = $(units);
+                    var unitMarkers = units;
                 }
                 else {
                     var unitMarkers = this.unitCollection.filter(function(model) {
@@ -181,6 +181,7 @@ define( ['App', 'backbone', 'backbone-radio', 'marionette', 'jquery', 'moment', 
                             unit_id: unit.getId()
                         };
                         localStorage.setItem('manage_boat_resource_filters', JSON.stringify(filters));
+                        localStorage.setItem('boat_resource_filters', JSON.stringify(filters));
                         me.mainRadioChannel.trigger('show-resources');
                     });
                 });
