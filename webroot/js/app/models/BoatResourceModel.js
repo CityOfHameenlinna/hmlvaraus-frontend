@@ -15,7 +15,14 @@ define(["jquery", "backbone", 'moment', "models/BaseModel"],
             },
 
             getName: function() {
-                return this.get('resource').name.fi;
+                var name = this.get('resource').name.fi
+                if(this.isDeleted())
+                    name += ' (Poistettu)';
+                return name;
+            },
+
+            isDeleted: function() {
+                return this.get('is_deleted');
             },
 
             getId: function() {

@@ -27,6 +27,7 @@ define( ['App',
                 var variables = {
                     currentUser: this.currentUser,
                     unit: this.model,
+                    is_deleted: this.model.isDeleted()
                 }
                 var tmpl = _.template(template);
                 this.$el.html(tmpl(variables));

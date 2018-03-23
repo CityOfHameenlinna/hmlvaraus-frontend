@@ -82,6 +82,9 @@ define( [
                         this.showChildView('filterRegion', new UnitFilterView(this.options));
                         this.$('thead').empty().append(unitHeaderTmpl);
                         this.setOrderingArrow();
+                        this.options.collection = new Backbone.Collection(this.options.collection.filter(function(model) {
+                            return !model.isDeleted();
+                        }));
                         this.showChildView('bodyRegion', new UnitListView(this.options));
                         break;
                 }

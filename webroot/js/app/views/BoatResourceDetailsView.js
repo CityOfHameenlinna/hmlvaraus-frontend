@@ -37,7 +37,8 @@ define( [
                     currentUser: this.currentUser,
                     resource: this.model,
                     currentReservation: this.model.get('current_reservation'),
-                    unit: this.unitModel
+                    unit: this.unitModel,
+                    is_deleted: this.model.isDeleted()
                 }
                 var tmpl = _.template(template);
                 this.$el.html(tmpl(variables));

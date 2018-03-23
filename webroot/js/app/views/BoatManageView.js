@@ -151,10 +151,12 @@ define( ['App', 'backbone', 'backbone-radio', 'marionette', 'jquery', 'moment', 
                     var unitMarkers = $(units);
                 }
                 else {
-                    var unitMarkers = this.unitCollection;
+                    var unitMarkers = this.unitCollection.filter(function(model) {
+                        return !model.isDeleted();
+                    });
                 }
 
-                unitMarkers.each(function(unit, unitHelper) {
+                unitMarkers.forEach(function(unit, unitHelper) {
                     if (!unit) {
                       unit = unitHelper;
                     }

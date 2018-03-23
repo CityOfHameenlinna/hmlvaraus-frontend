@@ -17,6 +17,7 @@ define( ['App', 'backbone', 'marionette', 'jquery', 'text!templates/unit_item_vi
             	var variables = {
             		model: this.model,
                     boat_resource_count: this.model.getResourcesCount(),
+                    boat_free_resource_count: this.model.getResourcesReservableCount()
             	}
             	var tmpl = _.template(template);
             	this.$el.html(tmpl(variables));

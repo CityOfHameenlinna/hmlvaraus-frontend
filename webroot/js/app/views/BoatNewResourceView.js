@@ -112,6 +112,7 @@ define( ['App',
                 })
                 .done(function(data) {
                     me.mainRadioChannel.trigger('resource-changed', data.id);
+                    me.unitCollection.fetch()
                 })
                 .fail(function(result) {
                     me.showRequestErrors(result.responseJSON);
