@@ -19,6 +19,10 @@ define(["jquery", "backbone", "models/BaseModel"],
 
             },
 
+            isDeleted: function() {
+                return this.get('is_deleted');
+            },
+
             getResourcesCount: function() {
                 return this.get('resources_count');
             },
@@ -36,7 +40,10 @@ define(["jquery", "backbone", "models/BaseModel"],
             },
 
             getName: function() {
-                return this.get('name').fi;
+                var name = this.get('name').fi;
+                if(this.isDeleted())
+                    name += ' (Poistettu)';
+                return name;
             },
 
             getStreetAddress: function() {

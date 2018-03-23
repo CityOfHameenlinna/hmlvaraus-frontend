@@ -2,6 +2,9 @@
     <div class="row">
         <div class="col-md-6">
             <h3><strong>Kohde</strong></h3>
+            <%if(is_deleted) {%>
+                <p class="text-danger">Tämä kohde on poistettu ja sitä ei voi muokata.</p>
+            <%}%>
             <dl class="dl-horizontal align-left">
                 <dt>Nimi</dt>
                 <dd>{{unit.getName()}}</dd>
@@ -26,8 +29,9 @@
 
                 <dt>Venepaikkoja yhteensä</dt>
                 <dd>{{unit.getResourcesCount()}}</dd>
-
-                <button class="btn-as-link" id="to-units-boats">Kohteen venepaikkoihin</button>
+                <%if(!is_deleted){%>
+                    <button class="btn-as-link" id="to-units-boats">Kohteen venepaikkoihin</button>
+                <%}%>
             </dl>
         </div>
         <div class="col-md-6 map-container">
@@ -36,7 +40,7 @@
     </div>
     <div class="row">
         <div class="col-md-12">
-            <%if(currentUser){%>
+            <%if(currentUser && !is_deleted){%>
               <button id="unit-edit" class="btn btn-default edit-button">Muokkaa</button>
             <%}%>
         </div>
