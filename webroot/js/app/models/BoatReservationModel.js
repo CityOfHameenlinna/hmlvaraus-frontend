@@ -102,8 +102,16 @@ define(["jquery", "backbone", "moment", "models/BaseModel"],
                 return userModel.get('first_name') + ' ' + userModel.get('last_name') + ' (' + userModel.get('username') + ')';
             },
 
+            getHasStarted: function() {
+                return this.get('has_started');
+            },
+
             getHasEnded: function() {
                 return this.get('has_ended');
+            },
+
+            getIsRenewed: function() {
+                return this.get('is_renewed');
             },
 
             getIsPaid: function() {

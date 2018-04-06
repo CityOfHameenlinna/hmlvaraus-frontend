@@ -10,13 +10,10 @@
 		<td class="hide-in-mobile">{{model.getStateFinnish()}}</td>
 	<%}%>
 	<td class="reservation-is-paid hide-in-mobile hide-in-tablet">
-		<label class="switch reservation-is-paid">
 		<%if(model.getIsPaid()) {%>
 			<input type="checkbox" class="reservation-is-paid" checked>
 		<%}else{%>
 			<input type="checkbox" class="reservation-is-paid">
 		<%}%>
-	  	<div class="slider round reservation-is-paid"></div>
-		</label>
 	</td>
 <%}%>

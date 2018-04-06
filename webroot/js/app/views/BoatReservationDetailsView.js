@@ -1,6 +1,7 @@
 define( [
     'App',
     'backbone',
+    'backbone-radio',
     'bootbox',
     'marionette',
     'jquery',
@@ -9,20 +10,57 @@ define( [
     'models/BoatResourceModel',
     'models/UnitModel',
     'text!templates/boat_reservation_details_view.tmpl'],
-    function(App, Backbone, bootbox, Marionette, $, BaseView, BoatReservationModel, BoatResourceModel, UnitModel, template) {
+    function(App, Backbone, Radio, bootbox, Marionette, $, BaseView, BoatReservationModel, BoatResourceModel, UnitModel, template) {
         return BaseView.extend({
             initialize: function() {
                 this.model = this.options.model;
                 this.currentUser = window.App.userCollection.currentUser;
                 this.resourceCollection = this.options.resourceCollection;
                 this.unitCollection = this.options.unitCollection;
+                this.mainRadioChannel = Radio.channel('main');
             },
 
             events: {
                 'click #reservation-edit': 'editReservation',
                 'click input.reservation-is-paid': 'changeIsPaid',
                 'click #reservation-cancel': 'cancelReservation',
-                'click input.reservation-key-returned': 'changeKeyReturned'
+                'click select#reservation-key-returned': 'changeKeyReturned',
+                'click #reservation-renew': 'renewReservation'
+            },
+
+            renewReservation: function() {
+                var me = this;
+                bootbox.confirm({
+                    message: 'Olet uusimassa henkilön ' + me.model.getReserverName() + ' venepaikkavarauksen. Varauksen päättymisajankohtaan luodaan uusi vuoden kestävä varaus. Oletko varma?',
+                    buttons: {
+                        confirm: {
+                            label: 'Uusi varaus',
+                            className: 'btn-default'
+                        },
+                        cancel: {
+                            label: 'Peruuta',
+                            className: 'btn-danger'
+                        }
+                    },
+                    callback: function (result) {
+                        if(result) {
+                            $.ajax({
+                                url: '/api/renewal/',
+                                method: 'POST',
+                                data: JSON.stringify({reservation_id: me.model.getId()}),
+                                dataType: 'json',
+                                contentType: 'application/json'
+                            })
+                            .done(function(data) {
+                                me.mainRadioChannel.trigger('reservation-changed', data.id);
+                            })
+                            .fail(function(result) {
+                                me.showRequestErrors(result.responseJSON);
+                            });
+                        }
+                    }
+                });
+
             },
 
             render: function() {
@@ -142,7 +180,7 @@ define( [
                 var me = this;
                 var target = $(e.currentTarget);
 
-                if(!target.prop('checked')) {
+                if(target.val() == 'client') {
                     bootbox.confirm({
                         message: 'Olet merkkaamassa avaimen palauttamattomaksi. Oletko varma?',
                         buttons: {
@@ -159,15 +197,14 @@ define( [
                             if(result) {
                                 me.model.set('key_returned', true).saveKeyReturned(false)
                                 .done(function() {
-                                    target.prop('checked', false);
+                                    
                                 })
                                 .fail(function() {
                                     me.showRequestErrors();
-                                    target.prop('checked', true);
                                 });
                             }
                             else {
-                                target.prop('checked', true);
+                                
                             }
                         }
                     });
@@ -175,11 +212,10 @@ define( [
                 else {
                     this.model.set('key_returned', true).saveKeyReturned(true)
                     .done(function() {
-                        target.prop('checked', true);
+                        
                     })
                     .fail(function() {
                         me.showRequestErrors();
-                        target.prop('checked', false);
                     });
                 }
             }
