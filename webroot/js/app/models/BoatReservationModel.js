@@ -37,11 +37,19 @@ define(["jquery", "backbone", "moment", "models/BaseModel"],
             },
 
             getResourceId: function() {
-                return this.get('reservation').resource.id;
+                return this.get('reservation').resource;
             },
 
             getResource: function() {
                 return this.get('reservation').resource;
+            },
+
+            getUnitName: function() {
+                return this.get('berth').resource.unit.name.fi;
+            },
+
+            getResourceName: function() {
+                return this.get('berth').resource.name.fi;
             },
 
             getBeginTime: function() {
@@ -178,6 +186,16 @@ define(["jquery", "backbone", "moment", "models/BaseModel"],
                     url: this.url() + '?show_cancelled=true',
                     method: 'patch',
                     data: JSON.stringify({is_paid: value}),
+                    dataType: 'json',
+                    contentType: 'application/json'
+                });
+            },
+
+            sendRenewalMail: function() {
+                return $.ajax({
+                    url: this.url() + '?show_cancelled=true',
+                    method: 'patch',
+                    data: JSON.stringify({resend_renewal: true}),
                     dataType: 'json',
                     contentType: 'application/json'
                 });

@@ -25,7 +25,38 @@ define( [
                 'click input.reservation-is-paid': 'changeIsPaid',
                 'click #reservation-cancel': 'cancelReservation',
                 'click select#reservation-key-returned': 'changeKeyReturned',
-                'click #reservation-renew': 'renewReservation'
+                'click #reservation-renew': 'renewReservation',
+                'click #reservation-resend-renewal': 'resendRenewalEmail'
+            },
+
+            resendRenewalEmail: function() {
+                var me = this;
+                bootbox.confirm({
+                    message: 'Olet lähettämässä henkilölle ' + me.model.getReserverName() + ' venepaikkavarauksen uusimisviestin tekstiviestillä ja sähköpostilla. Oletko varma?',
+                    buttons: {
+                        confirm: {
+                            label: 'Lähetä ',
+                            className: 'btn-default'
+                        },
+                        cancel: {
+                            label: 'Peruuta',
+                            className: 'btn-danger'
+                        }
+                    },
+                    callback: function (result) {
+                        if(result) {
+                            if(result) {
+                                me.model.sendRenewalMail()
+                                .done(function(data) {
+                                    me.mainRadioChannel.trigger('reservation-changed', data.id);
+                                })
+                                .fail(function(result) {
+                                    me.showRequestErrors(result.responseJSON);
+                                });
+                            }
+                        }
+                    }
+                });
             },
 
             renewReservation: function() {

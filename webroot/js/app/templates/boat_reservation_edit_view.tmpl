@@ -4,16 +4,10 @@
             <form id="edit-reservation-form">
                 <h3>Varauksen tiedot</h3>
                 <div class="form-group">
-                  <label for="reservation-resource">Varauskohde</label>
-                <select name="resource" class="form-control" id="reservation-resource">
-                  <% boat_resource_collection.forEach(function(resource) { %>
-                      <%if(reservation.getResourceId() == resource.getId()) {%>
-                          <option selected value="{{resource.getId()}}">{{getUnitName(resource.getUnitId())}} ({{resource.getName()}})</option>
-                      <%} else {%>
-                          <option value="{{resource.getId()}}">{{getUnitName(resource.getUnitId())}} ({{resource.getName()}})</option>
-                      <%}%>
-                  <%})%>
-                </select>
+                    <label for="reservation-resource">Varauskohde</label>
+                    <div class="form-group">
+                        {{reservation.getUnitName()}} ({{reservation.getResourceName()}})
+                    </div>
                 </div>
                 <div class="form-group">
                   <label for="reservation-begin">Aloitusaika</label>

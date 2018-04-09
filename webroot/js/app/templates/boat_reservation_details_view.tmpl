@@ -79,6 +79,9 @@
     <div class="row">
         <div class="col-md-12">
             <%if(!reservation.getIsRenewed() && !reservation.getHasEnded() && !reservation.getHasStarted() && reservation.getState() === 'confirmed' && currentUser) {%>
+                <button class="btn btn-default" id="reservation-resend-renewal">Lähetä uusintasähköposti</button>
+            <%}%>
+            <%if(!reservation.getIsRenewed() && !reservation.getHasEnded() && !reservation.getHasStarted() && reservation.getState() === 'confirmed' && currentUser) {%>
                 <button class="btn btn-default" id="reservation-renew">Varauksen uusinta</button>
             <%}%>
             <%if(currentUser){%>
