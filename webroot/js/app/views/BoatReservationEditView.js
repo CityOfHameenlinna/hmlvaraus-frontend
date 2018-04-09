@@ -128,8 +128,6 @@ define( ['App',
                 if(!data)
                     return;
 
-                this.model.set('begin', data.begin);
-                this.model.set('end', data.end);
                 this.model.set('state', data.state);
                 this.model.set('user', data.user);
                 this.model.set('reservable', data.reservable);
@@ -143,7 +141,8 @@ define( ['App',
                 reservation.reserver_phone_number = data.reserver_phone_number;
                 reservation.reserver_address_street = data.reserver_address_street;
                 reservation.reserver_address_zip = data.reserver_address_zip;
-
+                reservation.begin = moment(data.begin, 'D.M.YYYY HH:mm').toISOString();
+                reservation.end = moment(data.end, 'D.M.YYYY HH:mm').toISOString();
                 this.model.set('reservation', reservation);
 
                 this.model.save()
@@ -170,8 +169,8 @@ define( ['App',
                     event_description_fi: data.event_description,
                 }
 
-                data.begin = moment(data.begin, 'D.M.YYYY HH:mm').toISOString();
-                data.end = moment(data.end, 'D.M.YYYY HH:mm').toISOString();
+                data.reservation.begin = moment(data.begin, 'D.M.YYYY HH:mm').toISOString();
+                data.reservation.end = moment(data.end, 'D.M.YYYY HH:mm').toISOString();
                 data.state = 'confirmed';
                 data.user = {
                     id: data.user
