@@ -24,7 +24,7 @@ define( [
                 'click #reservation-edit': 'editReservation',
                 'click input.reservation-is-paid': 'changeIsPaid',
                 'click #reservation-cancel': 'cancelReservation',
-                'click select#reservation-key-returned': 'changeKeyReturned',
+                'change select#reservation-key-returned': 'changeKeyReturned',
                 'click #reservation-renew': 'renewReservation',
                 'click #reservation-resend-renewal': 'resendRenewalEmail'
             },
