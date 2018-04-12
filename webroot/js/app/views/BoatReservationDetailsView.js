@@ -48,6 +48,7 @@ define( [
                             if(result) {
                                 me.model.sendRenewalMail()
                                 .done(function(data) {
+                                    bootbox.alert("Uusintaviestit lähetettiin onnistuneesti!");
                                     me.mainRadioChannel.trigger('reservation-changed', data.id);
                                 })
                                 .fail(function(result) {
@@ -83,6 +84,7 @@ define( [
                                 contentType: 'application/json'
                             })
                             .done(function(data) {
+                                bootbox.alert("Varaus uusittiin onnistuneesti! Näet uusintavarauksen tiedot alla.");
                                 me.mainRadioChannel.trigger('reservation-changed', data.id);
                             })
                             .fail(function(result) {
