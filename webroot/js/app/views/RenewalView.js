@@ -36,11 +36,13 @@ define( [
             _render: function() {
                 var newEnd = moment(this.model.getEndTime()).add(1, 'years').format('D.M.YYYY');
                 var berthName = this.model.get('berth').resource.name.fi + ' (' + this.model.get('berth').resource.unit.name.fi + ')';
+                var berthPrice = this.model.get('berth').price + '€';
 
                 var variables = {
                 	model: this.model,
                     new_end: newEnd,
-                    berth_name: berthName
+                    berth_name: berthName,
+                    berth_price: berthPrice.replace('.', ',')
                 }
 
                 var tmpl = _.template(template);
