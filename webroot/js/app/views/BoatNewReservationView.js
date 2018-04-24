@@ -102,66 +102,64 @@ define( ['App',
                     me.checkBeginBeforeEnd();
                 });
 
-                if(!this.userCollection.currentUser) {
-                    var countDownTime = moment().add(15, 'minutes');
-                    this.intervalCounter = 0;
-                    this.pollCounter = 0;
-                    this.counterInterval = setInterval(function() {
-                        if(me.intervalCounter % 60 === 0 || me.intervalCounter === 0) {
-                            $.ajax({
-                                url: '/api/purchase/',
-                                method: 'patch',
-                                data: JSON.stringify({resource: me.options.resourceId}),
-                                dataType: 'json',
-                                contentType: 'application/json'
-                            })
-                            .done(function(data) {
-                                me.lastPollCode = data.code;
-                                me.pollCounter++;
-                            })
-                            .fail(function(err) {
-                                if(me.pollCounter === 0) {
-                                    bootbox.alert('Joku on jo varaamassa valitsemaasi venepaikkaa. Siirrytään venepaikkalistaukseen...')
-                                    clearInterval(this.counterInterval);
-                                    window.onbeforeunload = null;
-                                    $('.main-nav-item a').off('click.navigation');
-                                    me.$('#reservation-countdown-wrapper').text('Varaus peruutettu. Siirrytään venepaikkalistaukseen...');
-                                    setTimeout(function() {
-                                        window.App.router.navigate('#boat-resources', {trigger: true});
-                                        bootbox.hideAll()
-                                    }, 5000);
-                                }
-                                me.pollCounter++;
-                            });
-                        }
-                        me.intervalCounter++;
-                        var now = moment();
-                        var distance = countDownTime.diff(now);
-                        var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-                        var seconds = Math.round((distance % (1000 * 60)) / 1000);
-                        me.$('#reservation-countdown').text(minutes + 'm ' + seconds + 's ');
+                var countDownTime = moment().add(15, 'minutes');
+                this.intervalCounter = 0;
+                this.pollCounter = 0;
+                this.counterInterval = setInterval(function() {
+                    if(me.intervalCounter % 60 === 0 || me.intervalCounter === 0) {
+                        $.ajax({
+                            url: '/api/purchase/',
+                            method: 'patch',
+                            data: JSON.stringify({resource: me.options.resourceId}),
+                            dataType: 'json',
+                            contentType: 'application/json'
+                        })
+                        .done(function(data) {
+                            me.lastPollCode = data.code;
+                            me.pollCounter++;
+                        })
+                        .fail(function(err) {
+                            if(me.pollCounter === 0) {
+                                bootbox.alert('Joku on jo varaamassa valitsemaasi venepaikkaa. Siirrytään venepaikkalistaukseen...')
+                                clearInterval(this.counterInterval);
+                                window.onbeforeunload = null;
+                                $('.main-nav-item a').off('click.navigation');
+                                me.$('#reservation-countdown-wrapper').text('Varaus peruutettu. Siirrytään venepaikkalistaukseen...');
+                                setTimeout(function() {
+                                    window.App.router.navigate('#boat-resources', {trigger: true});
+                                    bootbox.hideAll()
+                                }, 5000);
+                            }
+                            me.pollCounter++;
+                        });
+                    }
+                    me.intervalCounter++;
+                    var now = moment();
+                    var distance = countDownTime.diff(now);
+                    var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                    var seconds = Math.round((distance % (1000 * 60)) / 1000);
+                    me.$('#reservation-countdown').text(minutes + 'm ' + seconds + 's ');
 
-                        if (distance < 0) {
-                            clearInterval(me.counterInterval);
-                            me.$('#reservation-countdown-wrapper').text('Varaus peruutettu. Siirrytään venepaikkalistaukseen...');
-                            setTimeout(function() {
-                                window.App.router.navigate('#boat-resources', {trigger: true});
-                            }, 3000);
-                        }
-                    }, 1000);
+                    if (distance < 0) {
+                        clearInterval(me.counterInterval);
+                        me.$('#reservation-countdown-wrapper').text('Varaus peruutettu. Siirrytään venepaikkalistaukseen...');
+                        setTimeout(function() {
+                            window.App.router.navigate('#boat-resources', {trigger: true});
+                        }, 3000);
+                    }
+                }, 1000);
 
-                    window.onbeforeunload = function (e) {
-                      var message = "Olet poistumassa kesken varausprosessin. Tallentamattomat tiedot menetetään. Poistutaanko?",
-                      e = e || window.event;
-                      if (e) {
-                        e.returnValue = message;
-                      }
-                      return message;
-                    };
-                    $('.main-nav-item a').off('click.navigation').on('click.navigation', function(e) {
-                        me.confirmNavigate(e);
-                    });
-                }
+                window.onbeforeunload = function (e) {
+                    var message = "Olet poistumassa kesken varausprosessin. Tallentamattomat tiedot menetetään. Poistutaanko?",
+                    e = e || window.event;
+                    if (e) {
+                    e.returnValue = message;
+                    }
+                    return message;
+                };
+                $('.main-nav-item a').off('click.navigation').on('click.navigation', function(e) {
+                    me.confirmNavigate(e);
+                });
             },
 
             setEndDate: function(e) {

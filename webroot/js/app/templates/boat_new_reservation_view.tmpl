@@ -5,14 +5,7 @@
 				<h3>Varauksen tiedot</h3>
 			  	<div class="form-group">
 			    	<label for="reservation-resource">Varauskohde</label>
-					<select name="resource" class="form-control" id="reservation-resource">
-						<% boat_resource_collection.forEach(function(resource) { %>
-							<%if(resource_id && resource_id == resource.getResourceId()) {%>
-								<option selected value="{{resource.getResourceId()}}">{{getUnitName(resource.getUnitId())}} ({{resource.getName()}})</option>
-							<%}%>
-							<option value="{{resource.getResourceId()}}">{{getUnitName(resource.getUnitId())}} ({{resource.getName()}})</option>
-						<%})%>
-					</select>
+                    <p>{{getUnitName(boat_resource_collection.getByResourceId(resource_id).getUnitId())}} ({{boat_resource_collection.getByResourceId(resource_id).getName()}})</p>
 			  	</div>
 				<div class="form-group">
 					<label for="reservation-begin">Aloitusaika</label>
@@ -78,6 +71,10 @@
 
 			  <button id="reservation-submit" type="submit" class="btn btn-default submit-button">Lisää varaus</button>
 			</form>
+		</div>
+		<div class="col-md-6">
+            <p id="reservation-countdown-wrapper">Varausaikaa jäljellä: <span id="reservation-countdown">15m 00s</span></p>
+            <p>Venepaikka pysyy sinulle varattuna 15 minuuttia. Mikäli aika loppuu tai varaus keskeytyy, venepaikka palaa taas kaikille varattavaksi.</p>
 		</div>
 	</div>
 </div>
