@@ -19,6 +19,7 @@ define(['backbone', 'marionette'], function(Backbone, Marionette) {
             "unit-new": "showUnitNew",
             "unit-edit/:id": "showUnitEdit",
             "purchase/:id": "showPurchaseResult",
+            "reservation-result/:id": "showReservationResult",
             "renewal/:id": "showReservationRenewal",
             "payment-report": "showPaymentReport"
        }

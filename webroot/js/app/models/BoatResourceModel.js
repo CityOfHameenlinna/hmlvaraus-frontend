@@ -117,9 +117,21 @@ define(["jquery", "backbone", 'moment', "models/BaseModel"],
                 return this.get('price');
             },
 
+            getPriceVatless: function() {
+                var price = Number(this.getPrice());
+                var priceVatless = (price / 1.24).toFixed(2)
+
+                return priceVatless;
+            },
+
+            getPriceVatlessFinnish: function() {
+                var priceVatless = this.getPriceVatless();
+                return priceVatless.toString().replace('.', ',');
+            },
+
             getPriceFinnish: function() {
                 var price = this.get('price');
-                price = String(price).replace('.', ',')
+                price = String(price).replace('.', ',');
                 if(price) {
                     return price;
                 }

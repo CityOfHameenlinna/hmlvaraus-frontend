@@ -8,6 +8,7 @@ define([
     'routers/AppRouter',
     'views/LayoutView',
     'views/PurchaseResultView',
+    'views/ReservationResultView',
     'views/BoatManageView',
     'views/BoatReservationListView',
     'views/BoatResourceListView',
@@ -34,7 +35,7 @@ define([
     'launcher',
     'endsWithPatch'
     ],
-    function ($, cookie, Backbone, Radio, Marionette, _, Router, LayoutView, PurchaseResultView, BoatManageView,
+    function ($, cookie, Backbone, Radio, Marionette, _, Router, LayoutView, PurchaseResultView, ReservationResultView, BoatManageView,
     BoatReservationListView, BoatResourceListView, BoatManageNewReservationView, BoatNewReservationView, BoatNewResourceView,
     BoatNewResourceGroundView, BoatReservationDetailsView, BoatReservationEditView, BoatResourceDetailsView, BoatResourceEditView,
     UnitEditView, UnitDetailsView, UnitNewView, ContentTableView, RenewalView, PaymentReportView, PaymentCollection,
@@ -66,6 +67,15 @@ define([
                 this.paymentCollection = new PaymentCollection();
 
                 this.mainRadioChannel = Radio.channel('main');
+
+                this.mainRadioChannel.on('reservation-result', function(id) {
+                    if(id) {
+                        url = 'reservation-result/' + id;
+                    }
+                    me.router.navigate(url, {trigger: true});
+                    $('.main-nav-item.active').removeClass('active');
+                    $('#nav-reservations').addClass('active');
+                });
 
                 this.mainRadioChannel.on('reservation-changed', function(id) {
                     var url = 'boat-reservations';
@@ -315,6 +325,12 @@ define([
         App.showPurchaseResult = function(code) {
             App.layoutView.showChildView('contentRegion', new PurchaseResultView({
                 code: code
+            }));
+        }
+
+        App.showReservationResult = function(id) {
+            App.layoutView.showChildView('contentRegion', new ReservationResultView({
+                modelId: id
             }));
         }
 

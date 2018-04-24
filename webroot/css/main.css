@@ -2,6 +2,15 @@
 @import 'bootstrap-datetimepicker.css';
 @import 'leaflet.css';
 
+@media print {
+    #header, #footer, #top-container, #logo-container {
+        display: none !important;
+    }
+    #root {
+        padding-left: 2% !important;
+        padding-right: 2% !important;
+    }
+}
 
 body.error-page {
   padding: 20px;
@@ -161,6 +170,8 @@ html {
     height: auto;
 
 }
+
+
 
 #header, #header .navbar > li.main-nav-item > a , thead > tr > th {
     font-family: shareBold;

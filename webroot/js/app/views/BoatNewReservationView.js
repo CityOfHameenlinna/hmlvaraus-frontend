@@ -251,7 +251,7 @@ define( ['App',
                     if(data.query_string)
                         window.open('https://payment.paytrail.com/e2/?'+data.query_string, '_self');
                     else
-                        me.mainRadioChannel.trigger('reservation-changed', data.id);
+                        me.mainRadioChannel.trigger('reservation-result', data.id);
                     $target.prop('disabled', false);
                 })
                 .fail(function(result) {
