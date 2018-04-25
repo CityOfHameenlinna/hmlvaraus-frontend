@@ -226,6 +226,10 @@ define(["jquery", "backbone", "moment", "models/BaseModel"],
 
             getDescription: function() {
                 return this.get('reservation').event_description;
+            },
+
+            getReservedByCitizen: function() {
+                return this.get('reserved_by_citizen');
             }
         });
         return Model;

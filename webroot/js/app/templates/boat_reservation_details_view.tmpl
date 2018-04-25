@@ -25,6 +25,13 @@
                     <dd>{{reservation.getStateFinnish()}}</dd>
                 <%}%>
 
+                <dt>Varauksen luonut</dt>
+                <%if(reservation.getReservedByCitizen()) {%>
+                    <dd>Kuntalainen</dd>
+                <%}else{%>
+                    <dd>Palvelupiste</dd>
+                <%}%>
+
                 <dt>Uusittu</dt>
                 <%if(reservation.getIsRenewed()) {%>
                     <dd>Kyllä</dd>

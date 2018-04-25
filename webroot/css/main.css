@@ -251,7 +251,13 @@ nav.navbar-default {
 }
 
 #footer {
-    min-height: 20px;
+    min-height: 40px;
+}
+
+.management-link {
+    font-size: 10pt;
+    margin-top: 10px;
+    margin-right: 15px;
 }
 
 .table-container {
