@@ -109,7 +109,7 @@ define( [
                 })
               }
               else {
-                this.resourceModel = this.resourceCollection.getByResourceId(this.model.get('berth').resource.id);
+                this.resourceModel = new BoatResourceModel(this.model.get('berth'));
                 this.unitModel = this.unitCollection.get(this.resourceModel.getUnitId());
                 me._render();
               }
@@ -148,7 +148,8 @@ define( [
                     callback: function (result) {
                         if(result) {
                             me.model.saveCancel()
-                            .done(function() {
+                            .done(function(data) {
+                                me.model.set(data);
                                 me.render();
                             })
                             .fail(function(result) {
