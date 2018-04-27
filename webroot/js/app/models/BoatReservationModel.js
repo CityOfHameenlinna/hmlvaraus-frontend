@@ -159,7 +159,7 @@ define(["jquery", "backbone", "moment", "models/BaseModel"],
             },
 
             getStateUpdated: function() {
-                var time = moment(this.get('state_updated_by'));
+                var time = moment(this.get('state_updated_at'));
                 return time.format("D.M.YYYY HH:mm");
             },
 
