@@ -70,6 +70,9 @@ define( ['App',
                 delete data.depth_cm;
                 delete data.price;
                 delete data.description;
+                data.reserver_name = data.reserver_lastname + ' ' + data.reserver_firstname;
+                delete data.reserver_lastname;
+                delete data.reserver_firstname;
 
                 data = {
                     'reservation': data,

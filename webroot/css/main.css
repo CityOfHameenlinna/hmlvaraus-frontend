@@ -12,6 +12,10 @@
     }
 }
 
+.reservation-link-container {
+    margin-bottom: 20px;
+}
+
 body.error-page {
   padding: 20px;
   background-color: #e0d6b9;

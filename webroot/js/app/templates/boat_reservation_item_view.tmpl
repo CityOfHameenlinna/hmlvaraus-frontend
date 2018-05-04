@@ -4,7 +4,7 @@
 	<td>{{unit_model.getName()}}</td>
 	<td>{{resource_model.getName()}}</td>
 	<td>{{model.getReserverName()}}</td>
-	<%if(!model.getKeyReturned() && model.getHasEnded() || !model.getKeyReturned() && model.isCancelled()){%>
+	<%if(!model.getKeyReturned() && model.getHasEnded() && resource_model.getType() == 'dock'){%>
 		<td class="hide-in-mobile">{{model.getStateFinnish()}}, Avain palauttamatta</td>
 	<%}else{%>
 		<td class="hide-in-mobile">{{model.getStateFinnish()}}</td>

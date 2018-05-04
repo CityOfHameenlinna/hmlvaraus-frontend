@@ -201,9 +201,12 @@ define( ['App',
                 data.user = {
                     id: data.user
                 }
+                data.reserver_name = data.reserver_lastname + ' ' + data.reserver_firstname;
                 data.reservable = false;
                 var reserverSSN = data.reserver_ssn;
                 delete data.reserver_ssn;
+                delete data.reserver_lastname;
+                delete data.reserver_firstname;
 
                 var berth = undefined;
                 var me = this;
