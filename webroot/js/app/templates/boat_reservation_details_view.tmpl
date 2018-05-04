@@ -65,9 +65,11 @@
                     </dd>
                 <%}%>
             </dl>
-            <div class="reservation-link-container">
-                <a href="#reservation-result/{{reservation.getId()}}">Tulostettava kuitti</a>
-            </div>
+            <%if(reservation.getState() === 'confirmed') {%>
+                <div class="reservation-link-container">
+                    <a href="#reservation-result/{{reservation.getId()}}">Tulostettava kuitti</a>
+                </div>
+            <%}%>
         </div>
         <div class="col-md-4">
             <h4><strong>Varaaja:</strong></h4>
