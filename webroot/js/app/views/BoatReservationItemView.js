@@ -136,9 +136,8 @@ define( ['App', 'backbone', 'marionette', 'jquery', 'bootbox', 'views/BaseView',
                 }
                 var tmpl = _.template(template);
                 this.$el.html(tmpl(variables));
-
-                if (!this.model.getKeyReturned() && this.model.getHasEnded()
-                || !this.model.getKeyReturned() && this.model.isCancelled()) {
+                if (!this.model.getKeyReturned() || this.model.getHasEnded()
+                && resourceModel.getType() == 'dock') {
                     this.$('td').closest('tr').addClass('danger');
                 }
             }
