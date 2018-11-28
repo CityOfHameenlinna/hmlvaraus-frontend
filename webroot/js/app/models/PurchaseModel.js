@@ -50,12 +50,12 @@ define(["jquery", "backbone", "models/BaseModel", 'moment'],
             },
 
             getReservationStart: function() {
-                var beginIsoString = this.get('hml_reservation').reservation.begin;
+                var beginIsoString = this.get('berth_reservation').reservation.begin;
                 return moment(beginIsoString).format('D.M.YYYY HH:mm');
             },
 
             getReservationEnd: function() {
-                var endIsoString = this.get('hml_reservation').reservation.end;
+                var endIsoString = this.get('berth_reservation').reservation.end;
                 return moment(endIsoString).format('D.M.YYYY HH:mm');
             },
 

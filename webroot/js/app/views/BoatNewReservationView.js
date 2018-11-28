@@ -218,14 +218,14 @@ define( ['App',
                     }
                 });
 
-                hmlreservationData = {
+                berthreservationData = {
                     berth: berth,
                     reservation: data,
                     is_paid: false,
                     code: me.lastPollCode
                 }
 
-                return hmlreservationData;
+                return berthreservationData;
             },
 
             save: function(e) {
@@ -244,7 +244,7 @@ define( ['App',
                 }
                 
                 $.ajax({
-                    url: this.userCollection.currentUser ? '/api/hml_reservation/' : '/api/purchase/',
+                    url: this.userCollection.currentUser ? '/api/berth_reservation/' : '/api/purchase/',
                     method: 'post',
                     data: JSON.stringify(bodyJson),
                     dataType: 'json',

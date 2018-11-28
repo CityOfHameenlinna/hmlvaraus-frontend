@@ -138,14 +138,14 @@ define( [
                     }
                 });
 
-                hmlreservationData = {
+                berthreservationData = {
                     berth: berth,
                     reservation: data,
                     is_paid: false,
                     reserver_ssn: reserverSSN
                 }
 
-                return hmlreservationData;
+                return berthreservationData;
             },
 
             save: function(e) {
@@ -158,7 +158,7 @@ define( [
                 if(!bodyJson)
                     return;
                 $.ajax({
-                    url: '/api/hml_reservation/',
+                    url: '/api/berth_reservation/',
                     method: 'post',
                     data: JSON.stringify(bodyJson),
                     dataType: 'json',

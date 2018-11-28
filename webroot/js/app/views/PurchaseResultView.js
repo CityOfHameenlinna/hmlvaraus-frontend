@@ -23,7 +23,7 @@ define( [
 
         		this.model.fetch({data:{code:this.code}})
         		.done(function(data) {
-					me.reservationModel = new BoatReservationModel(me.model.get('hml_reservation'));
+					me.reservationModel = new BoatReservationModel(me.model.get('berth_reservation'));
 					me.resourceModel = new BoatResourceModel(me.reservationModel.get('berth'));
 					me.unitModel = new UnitModel(me.resourceModel.get('resource').unit);
         			me._render();
