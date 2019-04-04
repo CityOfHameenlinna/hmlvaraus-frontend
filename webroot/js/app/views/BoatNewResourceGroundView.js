@@ -136,7 +136,7 @@ define( ['App',
                     return;
 
                 $.ajax({
-                    url: this.currentUser ? '/api/hml_reservation/' : '/api/purchase/',
+                    url: this.currentUser ? '/api/berth_reservation/' : '/api/purchase/',
                     method: 'post',
                     data: JSON.stringify(bodyJson),
                     dataType: 'json',

@@ -41,7 +41,7 @@ define( ['App',
 
             setupMap: function() {
                 var me = this;
-                var hml = {
+                var default_location = {
                     lng: 24.4590,
                     lat: 60.9929
                 }
@@ -60,13 +60,13 @@ define( ['App',
                 var modelLocation = this.model.getLocation();
 
                 var map = L.map(this.$('#map')[0], {
-                }).setView(modelLocation ? modelLocation : hml, 15);
+                }).setView(modelLocation ? modelLocation : default_location, 15);
 
                 L.tileLayer.wms('https://kartta.hameenlinna.fi/teklaogcweb/WMS.ashx?', {
                     layers: 'Opaskartta'
                 }).addTo(map);
 
-                this.unitMarker = L.marker(modelLocation ? modelLocation : hml, {icon: cMarker}).addTo(map);
+                this.unitMarker = L.marker(modelLocation ? modelLocation : default_location, {icon: cMarker}).addTo(map);
 
                 map.on('click', function(e) {
                     if(me.unitMarker) {

@@ -25,7 +25,7 @@ define( ['App', 'backbone', 'backbone-radio', 'marionette', 'jquery', 'moment', 
                     me.setupMap();
                 });
 
-                this.hml = undefined;
+                this.default_location = undefined;
                 this.cMarker = undefined;
                 this.map = undefined;
                 this.markerLayer = undefined;
@@ -111,7 +111,8 @@ define( ['App', 'backbone', 'backbone-radio', 'marionette', 'jquery', 'moment', 
                     this.childViewsInitiated = true;
                 }
                 var me = this;
-                this.hml = {
+                // TODO: default location should come from backend instead of hardcoding
+                this.default_location = {
                     lng: 24.4590,
                     lat: 60.9929
                 }
@@ -138,7 +139,7 @@ define( ['App', 'backbone', 'backbone-radio', 'marionette', 'jquery', 'moment', 
                     this.markerLayer = L.layerGroup().addTo(me.map);
                 }
                 else {
-                    this.map = L.map(this.$('#map')[0], options).setView(me.hml, 10);
+                    this.map = L.map(this.$('#map')[0], options).setView(me.default_location, 10);
                     L.tileLayer.wms('https://kartta.hameenlinna.fi/teklaogcweb/WMS.ashx?', {
                         layers: 'Opaskartta'
                     }).addTo(me.map);
@@ -173,7 +174,7 @@ define( ['App', 'backbone', 'backbone-radio', 'marionette', 'jquery', 'moment', 
 
                     var toolTipContent = '<div><h4>' + unit.getName() + '</h4>' + boatResourceCount + boatResourceReservableCount + '</div>';
                     var modelLocation = unit.getLocation();
-                    var marker = L.marker(modelLocation ? modelLocation : me.hml, {icon: me.cMarker}).bindTooltip(toolTipContent, toolTip).openTooltip().addTo(me.markerLayer);
+                    var marker = L.marker(modelLocation ? modelLocation : me.default_location, {icon: me.cMarker}).bindTooltip(toolTipContent, toolTip).openTooltip().addTo(me.markerLayer);
 
                     marker.on('click', function(e) {
                         var filters = {

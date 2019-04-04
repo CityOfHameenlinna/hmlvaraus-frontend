@@ -32,7 +32,7 @@ define( ['App',
             },
 
             setupMap: function() {
-                var hml = {
+                var default_location = {
                     lng: 24.4590,
                     lat: 60.9929
                 }
@@ -51,7 +51,7 @@ define( ['App',
                 var me = this;
                 var map = L.map(this.$('#map')[0], {
 
-                }).setView(hml, 13);
+                }).setView(default_location, 13);
 
                 L.tileLayer.wms('https://kartta.hameenlinna.fi/teklaogcweb/WMS.ashx?', {
                     layers: 'Opaskartta'

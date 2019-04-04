@@ -7,7 +7,7 @@ define([
     "models/BoatReservationModel"],
   function($, Backbone, Radio, moment, BaseCollection, BoatReservationModel) {
     var Collection = BaseCollection.extend({
-        url: '/api/hml_reservation/',
+        url: '/api/berth_reservation/',
         model: BoatReservationModel,
         filterKey: 'boat_reservation_filters',
         initialize: function() {

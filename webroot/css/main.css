@@ -110,12 +110,12 @@ input:checked + .slider:before {
 
 @font-face {
     font-family: shareBold;
-    src: url(/fonts/Share-Bold.ttf);
+    src: url(../fonts/Share-Bold.ttf);
 }
 
 @font-face {
     font-family: Verdana;
-    src: url(/fonts/Verdana.ttf);
+    src: url(../fonts/Verdana.ttf);
 }
 
 .manage-view-count {
@@ -196,7 +196,7 @@ body {
 }
 
 #header-logo {
-    background: url(/img/hml-logot.png) 0 0 no-repeat transparent!important;
+    background: url(../img/hml-logot.png) 0 0 no-repeat transparent!important;
     overflow: hidden;
     background-position: 0 -88px!important;
     height: 49px;

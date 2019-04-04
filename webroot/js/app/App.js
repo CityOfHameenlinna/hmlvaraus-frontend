@@ -83,7 +83,7 @@ define([
                         url = 'boat-reservation-details/' + id;
                     }
                     me.boatReservationCollection.fetch({
-                        url: '/api/hml_reservation/' + id + '/',
+                        url: '/api/berth_reservation/' + id + '/',
                         remove: false
                     }).done(function(){
                         me.router.navigate(url, {trigger: true});
