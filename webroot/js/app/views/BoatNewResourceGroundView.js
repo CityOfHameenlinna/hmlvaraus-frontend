@@ -143,8 +143,8 @@ define( ['App',
                     contentType: 'application/json'
                 })
                 .done(function(data) {
-                    if(data.query_string)
-                        window.open('https://payment.paytrail.com/e2/?' + data.query_string, '_self');
+                    if(data.url)
+                        window.open(data.url, '_self');
                     else
                         me.mainRadioChannel.trigger('reservation-changed', data.id);
                 })
